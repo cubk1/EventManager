@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group 'com.cubk'
+version 'snapshot'
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = targetCompatibility = 1.8
+
+dependencies {
+}
+
+java {
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+wrapper {
+    gradleVersion = "8.4"
+    distributionType = Wrapper.DistributionType.ALL
+}
