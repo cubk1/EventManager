@@ -9,6 +9,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class EventManager {
     private final Map<Method, Class<?>> registeredMethodMap;
@@ -50,7 +51,7 @@ public class EventManager {
                     methodObjectMap.put(method, obj);
 
                     Class<? extends Event> eventClass = method.getParameterTypes()[0].asSubclass(Event.class);
-                    priorityMethodMap.computeIfAbsent(eventClass, k -> new ArrayList<>()).add(method);
+                    priorityMethodMap.computeIfAbsent(eventClass, k -> new CopyOnWriteArrayList<>()).add(method);
                 }
             }
         }
